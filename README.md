@@ -1,1 +1,1 @@
-# kapedoko-app
+# KapeDoko
