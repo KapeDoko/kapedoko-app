@@ -1,5 +1,6 @@
-/** @type {import('tailwindcss').Config} */
-module.exports = {
+import type { Config } from "tailwindcss";
+
+export default <Partial<Config>>{
   theme: {
     extend: {
       colors: {
@@ -68,7 +69,11 @@ module.exports = {
           900: "#3A0B0B",
           950: "#1D0404",
         },
+        foreground: { 500: "#1E1E1E" },
       },
+    },
+    fontFamily: {
+      satoshi: ["Satoshi", "sans-serif"],
     },
   },
 };

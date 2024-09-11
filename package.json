@@ -14,5 +14,9 @@
     "@nuxt/ui": "^2.18.4",
     "@nuxtjs/ionic": "^0.15.1",
     "nuxt": "^3.12.4"
+  },
+  "dependencies": {
+    "@capacitor/android": "^6.1.2",
+    "@capacitor/status-bar": "^6.0.1"
   }
 }
