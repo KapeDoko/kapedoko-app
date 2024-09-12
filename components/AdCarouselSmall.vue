@@ -11,13 +11,17 @@
         active: 'bg-primary-500 dark:bg-primary-500',
         inactive: 'bg-black/20 dark:bg-black/20',
       },
+      container: 'rounded-lg',
     }"
     class="rounded-lg overflow-hidden"
     indicators
   >
-    <div class="bg-white h-[100px] w-full rounded-lg flex items-center shadow">
-      <span class="text-primary-500 p-5 text-lg"
-        ><span class="font-bold">{{ item.title }}</span></span
+    <div
+      class="bg-white h-[100px] w-full rounded-lg flex items-center justify-between shadow"
+    >
+      <span class="flex flex-col text-primary-500 p-5"
+        ><span class="text-sm">Visit</span>
+        <span class="font-bold">{{ item.title }}</span></span
       >
       <div class="w-[50vw] h-full">
         <img
@@ -44,23 +48,23 @@ onMounted(() => {
   }, 3000);
 });
 
-const CAFE_AD_BLOCK = [
+const CAFE_AD_BLOCK = ref([
   {
     id: 1,
-    title: "Visit Krooks Coffee House",
+    title: "Krooks Coffee House",
     image: "https://picsum.photos/200",
   },
   {
     id: 2,
-    title: "Visit Bubbalab Cafe",
+    title: "Bubbalab Cafe",
     image: "https://picsum.photos/200",
   },
   {
     id: 3,
-    title: "Visit Bakehouse Manila",
+    title: "Bakehouse Manila",
     image: "https://picsum.photos/200",
   },
-];
+]);
 </script>
 
 <style></style>

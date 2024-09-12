@@ -3,6 +3,10 @@ import type { Config } from "tailwindcss";
 export default <Partial<Config>>{
   theme: {
     extend: {
+      fontFamily: {
+        batangas: ['Batangas', 'sans-serif'],
+        satoshi: ['Satoshi', 'sans-serif'],
+      },
       colors: {
         kapedokoPrimary: {
           50: "#F5F0E8",
@@ -71,9 +75,6 @@ export default <Partial<Config>>{
         },
         foreground: { 500: "#1E1E1E" },
       },
-    },
-    fontFamily: {
-      satoshi: ["Satoshi", "sans-serif"],
     },
   },
 };

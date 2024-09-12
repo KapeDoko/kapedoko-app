@@ -1,5 +1,12 @@
 <template>
-  <div class="flex flex-col gap-4">
+  <div class="flex flex-col gap-4 py-5">
+    <span class="font-bold text-primary-500 flex items-center gap-2 font-batangas text-xl">
+      <UIcon
+        name="i-lucide-coffee"
+        class="w-6 h-6 text-primary-500 transition-all"
+      />
+      Browse some cafes</span
+    >
     <UCarousel
       v-slot="{ item, index }"
       :items="SORT_BY"
@@ -10,7 +17,7 @@
         :class="
           item.isActive
             ? 'bg-kapedokoPrimary-500 text-white font-bold'
-            : 'bg-black/10'
+            : 'bg-black/10 text-black/70 font-bold'
         "
         @click="
           () => {
