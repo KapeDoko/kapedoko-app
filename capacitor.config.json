@@ -1,0 +1,10 @@
+{
+  "appId": "com.kapedoko.app",
+  "appName": "kapedoko-app",
+  "webDir": "dist",
+  "plugins": {
+    "CapacitorHttp": {
+      "enabled": true
+    }
+  }
+}

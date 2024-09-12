@@ -1,7 +1,12 @@
-/** @type {import('tailwindcss').Config} */
-module.exports = {
+import type { Config } from "tailwindcss";
+
+export default <Partial<Config>>{
   theme: {
     extend: {
+      fontFamily: {
+        batangas: ['Batangas', 'sans-serif'],
+        satoshi: ['Satoshi', 'sans-serif'],
+      },
       colors: {
         kapedokoPrimary: {
           50: "#F5F0E8",
@@ -68,6 +73,7 @@ module.exports = {
           900: "#3A0B0B",
           950: "#1D0404",
         },
+        foreground: { 500: "#1E1E1E" },
       },
     },
   },
