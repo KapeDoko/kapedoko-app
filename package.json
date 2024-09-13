@@ -17,6 +17,9 @@
   },
   "dependencies": {
     "@capacitor/android": "^6.1.2",
-    "@capacitor/status-bar": "^6.0.1"
+    "@capacitor/status-bar": "^6.0.1",
+    "@pinia/nuxt": "^0.5.4",
+    "@vueuse/motion": "^2.2.5",
+    "pinia": "^2.2.2"
   }
 }
