@@ -5,14 +5,36 @@
 </template>
 
 <script lang="ts" setup>
+import { Capacitor } from "@capacitor/core";
 import { StatusBar } from "@capacitor/status-bar";
+import { HandlePermission } from "./utils/geolocation";
+import { Geolocation } from "@capacitor/geolocation";
 
-// Display content under transparent status bar (Android only)
-StatusBar.setOverlaysWebView({ overlay: true });
+const isGeolocationPermission = ref();
+const router = useRouter();
+const platform = Capacitor.getPlatform();
+
+if (platform === "android") {
+  StatusBar.setOverlaysWebView({ overlay: true });
+}
+
+onMounted(async () => {
+  if (platform === "web") {
+    return;
+  } else {
+    isGeolocationPermission.value = await HandlePermission();
+
+    if (!isGeolocationPermission.value) {
+      router.push("/geolocation-permission");
+    } else {
+      await Geolocation.getCurrentPosition();
+    }
+  }
+});
 </script>
 
 <style>
-*{
-  font-family: 'Satoshi', sans-serif;
+* {
+  font-family: "Satoshi", sans-serif;
 }
 </style>

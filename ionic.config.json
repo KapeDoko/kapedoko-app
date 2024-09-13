@@ -1,5 +1,7 @@
 {
   "name": "kapedoko-app",
-  "integrations": {},
+  "integrations": {
+    "capacitor": {}
+  },
   "type": "vue"
 }

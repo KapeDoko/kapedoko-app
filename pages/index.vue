@@ -25,7 +25,10 @@
               class="w-6 h-6 text-white"
             />
           </div>
-          <SearchBar class="px-5" @click="router.push('/search')" />
+          <ion-label router-link="/search"
+            ><SearchBar class="px-5 pointer-events-none" />
+          </ion-label>
+
           <AdCarouselSmall class="px-5" />
         </div>
 
@@ -41,6 +44,7 @@
 </template>
 
 <script lang="ts" setup>
+import { Capacitor } from "@capacitor/core";
 const router = useRouter();
 </script>
 
