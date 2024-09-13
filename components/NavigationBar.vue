@@ -1,5 +1,5 @@
 <template>
-  <div class="bg-white h-[100px] items-center flex">
+  <div class="h-[100px] items-center flex">
     <div class="flex max-w-[300px] w-full m-auto justify-between">
       <div
         v-for="(icon, index) in icons"

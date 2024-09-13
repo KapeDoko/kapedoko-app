@@ -37,15 +37,22 @@
         </div>
       </div>
     </ion-content>
-    <ion-footer>
-      <NavigationBar />
-    </ion-footer>
+      <ion-footer class="sticky bottom-0 w-full bg-white backdrop-blur-sm">
+        <NavigationBar />
+      </ion-footer>
   </ion-page>
 </template>
 
 <script lang="ts" setup>
 import { Capacitor } from "@capacitor/core";
 const router = useRouter();
+const userStore = useUserStore();
+
+onMounted(() => {
+  if (!userStore.isOnboardingFinished) {
+    router.push("/onboarding");
+  }
+});
 </script>
 
 <style></style>

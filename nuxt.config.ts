@@ -1,7 +1,7 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
   devtools: { enabled: false },
-  modules: ['@nuxtjs/ionic', '@nuxt/ui'],
+  modules: ['@nuxtjs/ionic', '@nuxt/ui', '@pinia/nuxt'],
   ionic: {
     integrations: {
       icons: false,
