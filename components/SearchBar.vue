@@ -53,7 +53,6 @@
 
 <script lang="ts" setup>
 import { type Cafe } from "@/types/cafe";
-import { clear } from "google-auth-library/build/src/auth/envDetect";
 
 const searchQuery = ref<string>("");
 const searchResults = ref<Cafe[] | null>(null);
