@@ -13,11 +13,11 @@
       :ui="{ item: 'snap-start', container: 'flex gap-3' }"
     >
       <div
-        class="px-5 py-1 rounded transition-all cursor-pointer"
+        class="px-2 py-1 rounded transition-all cursor-pointer"
         :class="
           item.isActive
-            ? 'bg-kapedokoPrimary-500 text-white font-bold'
-            : 'bg-black/10 text-black/70 font-bold'
+            ? 'bg-kapedokoPrimary-500 text-white px-5 font-bold'
+            : 'font-bold'
         "
         @click="
           () => {

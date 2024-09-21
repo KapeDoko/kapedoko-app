@@ -6,7 +6,7 @@
           <ion-toolbar class="opacity-0"></ion-toolbar>
           <div class="px-5 flex items-center justify-between">
             <div class="flex items-center gap-2">
-              <div class="h-8">
+              <div class="h-6">
                 <UIcon
                   name="i-lucide-arrow-left"
                   class="w-6 h-6 text-white"

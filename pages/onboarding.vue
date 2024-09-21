@@ -18,8 +18,15 @@
           :items="ONBOARDING_CAROUSEL"
           :ui="{
             item: 'basis-full',
+            indicators: {
+              wrapper: 'mb-2 gap-1 bottom-28 z-30',
+              base: 'h-2 w-2 rounded-full',
+              active: 'bg-primary-500 dark:bg-primary-500',
+              inactive: 'bg-black/20 dark:bg-black/20',
+            },
           }"
           class="rounded-lg overflow-hidden"
+          :indicators="!isFinished"
         >
           <OnboardingPanelThree class="absolute px-5" v-if="index == 2" />
 
@@ -39,10 +46,12 @@
               :class="onboardingCarousel?.page !== 2 ? 'opacity-0' : ''"
             />
           </div>
-          <div class="z-30 absolute bottom-0 w-full">
+          <div
+            class="z-30 absolute bottom-0 w-full bg-white/50 pt-5 backdrop-blur-sm"
+            :class="!isFinished ? '' : 'opacity-0 hidden'"
+          >
             <div
               class="flex flex-col items-center relative text-center px-5 gap-10 transition-all"
-              :class="!isFinished ? '' : 'opacity-0'"
             >
               <div class="flex flex-col gap-4">
                 <div class="flex justify-center" v-if="item.icons">
@@ -52,6 +61,23 @@
                 </div>
                 <span class="font-bold">{{ item.description }}</span>
               </div>
+              <UButton
+                label="Next"
+                block
+                class="h-12 font-bold"
+                :ui="{
+                  color: {
+                    gray: {
+                      solid:
+                        'dark:bg-primary-500 dark:text-white focus:ring-0 ring-0 text-sm h-12 dark:hover:bg-white/200',
+                    },
+                  },
+                }"
+                v-if="index != 2"
+                color="gray"
+                variant="solid"
+                @click="onboardingCarousel?.next()"
+              ></UButton>
             </div>
             <ion-toolbar class="opacity-0"></ion-toolbar>
           </div>
@@ -62,7 +88,11 @@
 </template>
 
 <script lang="ts" setup>
-const onboardingCarousel = ref<{ page: number; pages: number } | null>(null);
+const onboardingCarousel = ref<{
+  page: number;
+  pages: number;
+  next(): void;
+} | null>(null);
 const isFinished = ref(false);
 
 // Add opacity-0 to the onboardingCarousel once the current

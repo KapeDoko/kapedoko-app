@@ -44,7 +44,6 @@
 </template>
 
 <script lang="ts" setup>
-import { Capacitor } from "@capacitor/core";
 const router = useRouter();
 const userStore = useUserStore();
 

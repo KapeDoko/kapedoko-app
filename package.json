@@ -10,6 +10,7 @@
     "postinstall": "nuxt prepare"
   },
   "devDependencies": {
+    "@iconify-json/lucide": "^1.2.4",
     "@nuxt/devtools": "latest",
     "@nuxt/ui": "^2.18.4",
     "@nuxtjs/ionic": "^0.15.1",
@@ -23,7 +24,9 @@
     "@capacitor/keyboard": "^6.0.2",
     "@capacitor/status-bar": "^6.0.1",
     "@pinia/nuxt": "^0.5.4",
+    "@types/mapbox-gl": "^3.4.0",
     "@vueuse/motion": "^2.2.5",
+    "mapbox-gl": "^3.6.0",
     "pinia": "^2.2.2"
   }
 }

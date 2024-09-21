@@ -27,7 +27,7 @@
 </template>
 
 <script lang="ts" setup>
-import { ref } from 'vue';
+const router = useRouter();
 
 const icons = ref([
   { name: 'i-lucide-home', isSelected: true, link: '/'},
@@ -44,6 +44,13 @@ const toggleSelection = (selectedIndex: number) => {
     }
   });
 };
+
+// Watch current route and update selected icon
+watch(() => router.currentRoute.value.path, (path) => {
+  icons.value.forEach((icon) => {
+    icon.isSelected = icon.link === path;
+  });
+});
 </script>
 
 <style></style>
