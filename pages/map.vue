@@ -1,6 +1,6 @@
 <template>
   <ion-page>
-    <ion-content>
+    <ion-content v-if="isLocationEnabled">
       <div class="h-full relative">
         <!-- MapBox Header -->
         <div
@@ -104,6 +104,7 @@
         <MapCafesNearMe />
       </ion-modal>
     </ion-content>
+    <MapLocationNotEnabled v-else />
   </ion-page>
 </template>
 
@@ -136,6 +137,9 @@ const isLoaded = ref(false);
 const loader = ref();
 const router = useRouter();
 
+// Geolocation variables
+const isLocationEnabled = ref(true);
+
 onUnmounted(() => {
   map.value?.remove();
   modalController.dismiss();
@@ -143,8 +147,9 @@ onUnmounted(() => {
 
 onMounted(async () => {
   showLoading();
-  INITIAL_COORDINATES.value = (await getInitialLocation()) as LngLatLike;
+  await initializeMapLocation();
   createMapInstance();
+  openShowCafesNearMeModal();
 
   // Check if map is fully loaded
   map.value?.on("load", () => {
@@ -152,8 +157,22 @@ onMounted(async () => {
     loader.value?.dismiss();
   });
 
+  map.value?.on("dragstart", () => {
+    modalController.dismiss();
+  });
+
   SHOW_CAFES_BUTTON.value = true;
 });
+
+const initializeMapLocation = async () => {
+  INITIAL_COORDINATES.value = (await getInitialLocation()) as LngLatLike;
+  if (INITIAL_COORDINATES.value.code) {
+    console.error(INITIAL_COORDINATES.value.message);
+    loader.value?.dismiss();
+    isLocationEnabled.value = false;
+    return;
+  }
+};
 
 const createMapInstance = async () => {
   if (MAPBOX_CONTAINER_REF.value) {
@@ -171,8 +190,12 @@ const createMapInstance = async () => {
 };
 
 const getInitialLocation = async () => {
-  const coordinates = await Geolocation.getCurrentPosition();
-  return [coordinates.coords.longitude, coordinates.coords.latitude];
+  try {
+    const position = await Geolocation.getCurrentPosition();
+    return [position.coords.longitude, position.coords.latitude];
+  } catch (error) {
+    return error;
+  }
 };
 
 const showLoading = async () => {
