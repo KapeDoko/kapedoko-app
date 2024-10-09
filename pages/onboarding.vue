@@ -19,7 +19,7 @@
           :ui="{
             item: 'basis-full',
             indicators: {
-              wrapper: 'mb-2 gap-1 bottom-28 z-30',
+              wrapper: ' gap-1 bottom-28 z-30',
               base: 'h-2 w-2 rounded-full',
               active: 'bg-primary-500 dark:bg-primary-500',
               inactive: 'bg-black/20 dark:bg-black/20',
