@@ -94,7 +94,7 @@
       <ion-modal
         v-if="isLoaded"
         ref="CAFES_NEAR_ME_REF"
-        :is-open="true"
+        :is-open="false"
         trigger="open-cafes-near-me-modal"
         :initial-breakpoint="0.25"
         :breakpoints="[0, 0.25, 0.5, 1]"
@@ -102,6 +102,27 @@
         :backdrop-breakpoint="0.5"
       >
         <MapCafesNearMe />
+      </ion-modal>
+
+      <!-- MapBox Cafe Information -->
+      <ion-modal
+        v-if="isLoaded"
+        ref="CAFE_INFORMATION_REF"
+        :is-open="true"
+        trigger="open-cafe-information-modal"
+        :initial-breakpoint="0.25"
+        :breakpoints="[0, 0.25, 0.5, 1]"
+        :backdrop-dismiss="true"
+        :backdrop-breakpoint="0.5"
+      >
+        <ion-content>
+          <div class="px-5 py-8 space-y-4 overflow-y-auto">
+            <CoffeeshopinfoHeader />
+            <CoffeeshopinfoImageAlbum />
+            <CoffeeshopinfoReviewSummary />
+            <CoffeeshopinfoReviews />
+          </div>
+        </ion-content>
       </ion-modal>
     </ion-content>
     <MapLocationNotEnabled v-else />

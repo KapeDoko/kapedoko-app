@@ -58,7 +58,7 @@
         </div>
 
         <!-- Album Style -->
-        <div v-if="isAlbumLayoutActive" class="px-5 flex-1 pb-5">
+        <div v-if="isAlbumLayoutActive" class="px-5 flex-1 pb-5" v-motion-pop-visible-once>
           <div class="bg-primary-500 flex flex-col gap-5 rounded-lg p-8 h-full">
             <div
               v-for="(cafe, index) in CAFE_DATA"
@@ -75,7 +75,7 @@
                 <div
                   class="flex flex-col items-center justify-center h-[20%] text-center"
                 >
-                  <span class="font-bold text-xl font-batangas">{{
+                  <span class="font-bold text-xl font-batangas" v-motion-slide-visible-left>{{
                     cafe.cafeName
                   }}</span>
                   <span class="">{{ cafe.cafeAddress }}</span>
@@ -87,14 +87,14 @@
                 name="i-lucide-circle-arrow-left"
                 class="w-8 h-8"
                 @click="scrollAlbum(1)"
-                :class="albumCounter > 0 ? '' : 'opacity-0'"
+                :class="albumCounter > 0 ? '' : 'text-black/20'"
               />
               <UIcon
                 name="i-lucide-circle-arrow-right"
                 class="w-8 h-8"
                 @click="scrollAlbum(0)"
                 :class="
-                  albumCounter === CAFE_DATA.length - 1 ? 'opacity-0' : ''
+                  albumCounter === CAFE_DATA.length - 1 ? 'text-black/20' : ''
                 "
               />
             </div>
@@ -106,6 +106,7 @@
             v-for="(cafe, index) in CAFE_DATA"
             :key="index"
             class="shadow-lg p-4 rounded-lg transition-all hover:bg-kapedokoPrimary-100"
+            v-motion-slide-right
           >
             <div class="flex items-center justify-between gap-3">
               <div class="flex items-center gap-3">

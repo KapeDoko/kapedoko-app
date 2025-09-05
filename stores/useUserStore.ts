@@ -2,7 +2,7 @@ import { defineStore } from "pinia";
 
 export const useUserStore = defineStore("user", {
   state: () => ({
-    isOnboardingFinished: false as boolean,
+    isOnboardingFinished: true as boolean,
   }),
   getters: {},
   actions: {
