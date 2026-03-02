@@ -1,7 +1,7 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
   devtools: { enabled: false },
-  modules: ['@nuxtjs/ionic', '@nuxt/ui'],
+  modules: ['@nuxtjs/ionic', '@nuxt/ui', '@pinia/nuxt'],
   ionic: {
     integrations: {
       icons: false,
@@ -16,7 +16,7 @@ export default defineNuxtConfig({
   },
   compatibilityDate: '2024-09-10',
   css: [
-    '~/assets/fonts/satoshi/WEB/css/satoshi.css',  
-    '~/assets/css/main.css',
+    '~/assets/fonts/batangas/css/batangas.css',
+    '~/assets/fonts/satoshi/css/satoshi.css',
   ],
 })
