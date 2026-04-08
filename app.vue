@@ -11,6 +11,13 @@ import { Capacitor } from "@capacitor/core";
 import { StatusBar } from "@capacitor/status-bar";
 import { HandlePermission } from "./utils/geolocation";
 import { Geolocation } from "@capacitor/geolocation";
+import { useAuthStore } from "./stores/useAuthStore";
+
+const authStore = useAuthStore()
+
+onMounted(() => {
+  authStore.init()
+})
 
 const isGeolocationPermission = ref();
 const router = useRouter();

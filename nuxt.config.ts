@@ -2,11 +2,13 @@
 export default defineNuxtConfig({
   devtools: { enabled: false },
   ssr: false,
-  modules: [
-  '@nuxt/ui',
-  '@nuxtjs/ionic',
-  '@pinia/nuxt',
-  ],
+  modules: ["@nuxt/ui", "@nuxtjs/ionic", "@pinia/nuxt"],
+  runtimeConfig: {
+    public: {
+      supabaseUrl: process.env.SUPABASE_URL,
+      supabaseKey: process.env.SUPABASE_KEY,
+    },
+  },
   ionic: {
     integrations: {
       icons: false,
@@ -17,11 +19,11 @@ export default defineNuxtConfig({
     },
     config: {
       //
-    }
+    },
   },
-  compatibilityDate: '2024-09-10',
+  compatibilityDate: "2024-09-10",
   css: [
-    '~/assets/fonts/batangas/css/batangas.css',
-    '~/assets/fonts/satoshi/css/satoshi.css',
+    "~/assets/fonts/batangas/css/batangas.css",
+    "~/assets/fonts/satoshi/css/satoshi.css",
   ],
-})
+});

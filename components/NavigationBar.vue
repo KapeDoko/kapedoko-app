@@ -30,10 +30,10 @@
 const router = useRouter();
 
 const icons = ref([
-  { name: 'i-lucide-home', isSelected: true, link: '/'},
-  { name: 'i-lucide-heart', isSelected: false, link: '/favorites'},
-  { name: 'i-lucide-map', isSelected: false, link: '/map'},
-  { name: 'i-lucide-circle-user-round', isSelected: false, link: '/profile'},
+  { name: 'i-lucide-home', isSelected: true, link: '/app'},
+  { name: 'i-lucide-heart', isSelected: false, link: '/app/favorites'},
+  { name: 'i-lucide-map', isSelected: false, link: '/app/map'},
+  { name: 'i-lucide-circle-user-round', isSelected: false, link: '/app/profile'},
 ]);
 
 const toggleSelection = (selectedIndex: number) => {

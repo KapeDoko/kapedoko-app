@@ -1,9 +1,17 @@
 <template>
   <div class="flex w-full bg-white rounded-lg shadow">
-    <div class="max-w-[90px]">
+    <div class="relative max-w-[90px] min-h-full overflow-hidden rounded-l-lg bg-black/5">
+      <div
+        v-if="!isImageLoaded"
+        class="absolute inset-0 animate-pulse bg-gradient-to-r from-black/10 via-black/5 to-black/10"
+      />
       <img
         :src="cafe.cafeImage"
-        class="h-full w-full object-cover rounded-l-lg"
+        class="h-full w-full object-cover rounded-l-lg transition-opacity duration-300"
+        :class="isImageLoaded ? 'opacity-100' : 'opacity-0'"
+        @load="isImageLoaded = true"
+        @error="isImageLoaded = true"
+        loading="lazy"
       />
     </div>
     <div class="flex flex-col p-4 flex-grow">
@@ -73,6 +81,7 @@ const props = defineProps<{
 }>();
 
 const cafe = props.cafe;
+const isImageLoaded = ref(false);
 
 const fullStars = (rating: number) => {
   return Math.floor(rating);

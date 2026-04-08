@@ -55,47 +55,56 @@
 import { type Cafe } from "@/types/cafe";
 
 const searchQuery = ref<string>("");
-const searchResults = ref<Cafe[] | null>(null);
-const isLoading = ref(false);
+const searchResults = defineModel<Cafe[] | null>({ default: null });
+const isLoading = defineModel<boolean>("loading", { default: false });
 
-const props = defineProps({
-  modelValue: {
-    type: Array as () => Cafe[] | null,
-    default: () => [],
-  },
-});
+let searchToken = 0;
 
-const emit = defineEmits(["update:modelValue"]);
+const delay = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
 
-const search = () => {
-  if (searchQuery.value) {
-    isLoading.value = true;
-    /* const data = searchCafe; */
+const search = async () => {
+  const query = searchQuery.value.trim().toLowerCase();
 
-    searchResults.value = CAFE_DATA.value as Cafe[];
-
-    // Emit searchResults to the Parent Component
-    isLoading.value = false;
-  } else {
+  if (!query) {
+    searchToken += 1;
     searchResults.value = null;
+    isLoading.value = false;
+    return;
   }
-  emit("update:modelValue", searchResults.value);
+
+  const currentToken = ++searchToken;
+  isLoading.value = true;
+  searchResults.value = null;
+
+  await delay(180);
+
+  if (currentToken !== searchToken) {
+    return;
+  }
+
+  searchResults.value = CAFE_DATA.value.filter((cafe) => {
+    return [cafe.cafeName, cafe.cafeAddress].some((field) =>
+      field.toLowerCase().includes(query)
+    );
+  }) as Cafe[];
+  isLoading.value = false;
 };
 
 const clearSearch = () => {
+  searchToken += 1;
   searchQuery.value = "";
   searchResults.value = null;
-  emit("update:modelValue", searchResults.value);
+  isLoading.value = false;
 };
 
 watch(
   () => searchQuery.value,
   (newValue) => {
     if (newValue) {
-      search();
+      void search();
     } else {
       searchResults.value = null;
-      emit("update:modelValue", searchResults.value);
+      isLoading.value = false;
     }
   }
 );
