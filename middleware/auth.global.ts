@@ -11,7 +11,7 @@ export default defineNuxtRouteMiddleware(async (to) => {
 
   // If it's a protected route and user isn't logged in, boot them to login
   if (isProtectedRoute && !auth.user) {
-    return navigateTo("/login");
+    return navigateTo("/");
   }
 
   // If user is logged in and tries to go to /login, send them to the app

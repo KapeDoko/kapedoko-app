@@ -111,7 +111,7 @@ const handleSignOut = async () => {
   try {
     isSigningOut.value = true;
     await authStore.signOut();
-    await router.replace("/login");
+    await router.replace("/");
   } catch (error) {
     console.error("Failed to sign out:", error);
   } finally {
