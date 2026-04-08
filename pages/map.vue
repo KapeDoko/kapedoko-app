@@ -140,6 +140,11 @@ const router = useRouter();
 // Geolocation variables
 const isLocationEnabled = ref(true);
 
+// Register observer during setup to avoid lifecycle hook warnings.
+useResizeObserver(MAPBOX_CONTAINER_REF, () => {
+  map.value?.resize();
+});
+
 onUnmounted(() => {
   map.value?.remove();
   modalController.dismiss();
@@ -165,16 +170,17 @@ onMounted(async () => {
 });
 
 const initializeMapLocation = async () => {
-  INITIAL_COORDINATES.value = (await getInitialLocation()) as LngLatLike;
-  if (INITIAL_COORDINATES.value.code) {
-    console.error(INITIAL_COORDINATES.value.message);
+  const result = await getInitialLocation();
+  if (!result.success) {
+    console.error(result.error);
     loader.value?.dismiss();
     isLocationEnabled.value = false;
     return;
   }
+  INITIAL_COORDINATES.value = result.data as LngLatLike;
 };
 
-const createMapInstance = async () => {
+const createMapInstance = () => {
   if (MAPBOX_CONTAINER_REF.value) {
     map.value = new mapboxgl.Map({
       container: MAPBOX_CONTAINER_REF.value,
@@ -183,18 +189,14 @@ const createMapInstance = async () => {
       style: MAPBOX_STYLE, // style URL
     });
   }
-
-  useResizeObserver(MAPBOX_CONTAINER_REF, () => {
-    map.value?.resize();
-  });
 };
 
 const getInitialLocation = async () => {
   try {
     const position = await Geolocation.getCurrentPosition();
-    return [position.coords.longitude, position.coords.latitude];
+    return { success: true, data: [position.coords.longitude, position.coords.latitude] };
   } catch (error) {
-    return error;
+    return { success: false, error };
   }
 };
 
