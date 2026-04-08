@@ -4,6 +4,8 @@ export default defineNuxtConfig({
   ssr: false,
   modules: ["@nuxt/ui", "@nuxtjs/ionic", "@pinia/nuxt"],
   runtimeConfig: {
+    foursquareApiKey: process.env.FOURSQUARE_API_KEY,
+    foursquareVersion: process.env.FOURSQUARE_API_VERSION || "2025-06-17",
     public: {
       supabaseUrl: process.env.SUPABASE_URL,
       supabaseKey: process.env.SUPABASE_KEY,

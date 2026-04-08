@@ -14,6 +14,7 @@
     "@nuxt/devtools": "latest",
     "@nuxt/ui": "^2.18.4",
     "@nuxtjs/ionic": "^0.15.1",
+    "@types/lodash": "^4.17.24",
     "nuxt": "^3.12.4"
   },
   "dependencies": {

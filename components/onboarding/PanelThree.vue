@@ -36,7 +36,7 @@ const userStore = useUserStore();
 
 const finishedOnboarding = () => {
   console.log("Finished onboarding");
-  userStore.isOnboardingFinished = true;
+  userStore.finishOnboarding();
   router.push("/app");
 };
 </script>

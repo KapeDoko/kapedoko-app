@@ -41,6 +41,9 @@ const router = useRouter();
 const userStore = useUserStore();
 
 onMounted(async () => {
+  userStore.hydrateOnboardingStatus();
+
+
   if (!userStore.isOnboardingFinished) {
     router.push("/app/onboarding");
   }
