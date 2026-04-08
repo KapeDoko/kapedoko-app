@@ -1,6 +1,6 @@
 <template>
   <ion-page>
-    <ion-content>
+    <ion-content class="home-content" :fullscreen="true">
       <div class="kapedoko-page">
         <div class="h-[240px] bg-kapedokoPrimary-500 relative">
           <LogoKapedokoLight class="size-[250px] absolute -top-3 -right-10 opacity-5" />
@@ -18,7 +18,7 @@
             </div>
             <UIcon name="i-lucide-circle-user-round" class="w-6 h-6 text-white" />
           </div>
-          <ion-label router-link="/search">
+          <ion-label router-link="/app/search">
             <SearchBar class="px-5 pointer-events-none" />
           </ion-label>
 
@@ -30,7 +30,7 @@
         </div>
       </div>
     </ion-content>
-    <ion-footer class="sticky bottom-0 w-full bg-white backdrop-blur-sm">
+    <ion-footer class="sticky bottom-0 w-full bg-white/95 backdrop-blur-sm border-t border-kapedokoSecondary-200/80">
       <NavigationBar />
     </ion-footer>
   </ion-page>
@@ -50,4 +50,8 @@ onMounted(async () => {
 });
 </script>
 
-<style></style>
+<style scoped>
+.home-content {
+  --background: theme("colors.kapedokoGray.50");
+}
+</style>

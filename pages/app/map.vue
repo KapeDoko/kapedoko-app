@@ -1,16 +1,20 @@
 <template>
   <ion-page>
-    <ion-content v-if="isLocationEnabled">
+    <ion-content v-if="isLocationEnabled" class="map-content" :fullscreen="true">
       <div class="h-full relative">
         <!-- MapBox Header -->
         <div v-if="isLoaded"
-          class="h-[190px] w-full absolute top-0 z-30 bg-gradient-to-b from-white to-white/0 flex flex-col gap-5">
+          class="h-[200px] w-full absolute top-0 z-30 bg-gradient-to-b from-kapedokoPrimary-500/85 via-kapedokoPrimary-500/45 to-transparent flex flex-col gap-5">
           <ion-toolbar class="opacity-0"></ion-toolbar>
           <div class="px-5 flex items-center justify-between">
             <div class="flex items-center gap-2">
-              <div class="h-6">
-                <UIcon name="i-lucide-arrow-left" class="w-6 h-6 text-kapeDoKoPrimary-500" @click="router.back()" />
-              </div>
+              <button
+                class="size-9 rounded-full bg-white/10 border border-white/20 backdrop-blur-sm flex items-center justify-center"
+                aria-label="Go back"
+                @click="router.back()"
+              >
+                <UIcon name="i-lucide-arrow-left" class="w-5 h-5 text-white" />
+              </button>
               <div class="h-6">
                 <LogoKapedokoDark class="h-full w-full object-cover" />
               </div>
@@ -18,7 +22,7 @@
                 <LogoHorizontalKapedokoTextDark class="h-full w-full object-cover" />
               </div>
             </div>
-            <span class="text-kapedokoPrimary-500 font-bold text-sm">MAPS</span>
+            <span class="text-white font-bold text-xs tracking-[0.22em]">MAPS</span>
           </div>
           <div class="px-5">
             <UInput size="xl" color="gray" :ui="{
@@ -26,7 +30,7 @@
               color: {
                 gray: {
                   outline:
-                    'dark:bg-white/500 dark:text-black focus:ring-0 ring-0 text-sm h-12',
+                    'dark:bg-white/500 dark:text-black focus:ring-0 ring-0 text-sm h-12 rounded-xl',
                 },
               },
             }" :trailing="false" placeholder="Search a coffee shop" class="flex-grow search-bar shadow-lg">
@@ -43,7 +47,7 @@
         <!-- Show cafes near me Button -->
         <div class="absolute z-30 inset-x-0 px-5 transition-all delay-1000"
           :class="SHOW_CAFES_BUTTON ? 'bottom-10' : '-bottom-20'">
-          <UButton block class="h-12 font-bold shadow-lg" :ui="{
+          <UButton block class="h-12 font-bold shadow-lg rounded-xl" :ui="{
             color: {
               gray: {
                 solid:
@@ -402,6 +406,10 @@ onMounted(async () => {
 </script>
 
 <style>
+.map-content {
+  --background: theme("colors.kapedokoGray.50");
+}
+
 .cafe-marker {
   --marker-delay: 0ms;
   width: 38px;
