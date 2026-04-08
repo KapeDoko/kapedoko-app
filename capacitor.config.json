@@ -1,6 +1,6 @@
 {
   "appId": "com.kapedoko.app",
-  "appName": "kapedoko-app",
+  "appName": "KapeDoko",
   "webDir": "dist",
   "plugins": {
     "CapacitorHttp": {
