@@ -9,14 +9,14 @@
           <ion-toolbar class="opacity-0"></ion-toolbar>
           <div class="px-5 flex items-center justify-between">
             <div class="flex items-center gap-2">
-              <div class="h-8">
+              <div class="h-8 w-[30px]">
                 <LogoKapedokoLight class="h-full w-full object-cover" />
               </div>
-              <div class="h-8">
+              <div class="h-8 w-[50px]">
                 <LogoVerticalKapedokoTextLight class="h-full w-full object-cover" />
               </div>
             </div>
-            <UIcon name="i-lucide-circle-user-round" class="w-6 h-6 text-white" />
+            <UIcon name="i-lucide-circle-user-round" class="shrink-0 w-6 h-6 text-white" />
           </div>
           <ion-label router-link="/app/search">
             <SearchBar class="px-5 pointer-events-none" />

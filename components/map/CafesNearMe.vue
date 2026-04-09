@@ -1,7 +1,6 @@
 <template>
   <ion-content>
-    <ion-toolbar class="opacity-0" />
-    <div class="px-5">
+    <div class="px-5 pt-8">
       <div class="flex items-center gap-2">
         <UIcon
           name="i-lucide-coffee"

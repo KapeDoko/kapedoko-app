@@ -15,11 +15,11 @@
               >
                 <UIcon name="i-lucide-arrow-left" class="w-5 h-5 text-white" />
               </button>
-              <div class="h-6">
-                <LogoKapedokoDark class="h-full w-full object-cover" />
+              <div class="h-6 w-[20px]">
+                <LogoKapedokoLight class="h-full w-full object-cover" />
               </div>
-              <div class="h-6">
-                <LogoHorizontalKapedokoTextDark class="h-full w-full object-cover" />
+              <div class="h-6 w-[100px]">
+                <LogoHorizontalKapedokoTextLight class="h-full w-full object-cover" />
               </div>
             </div>
             <span class="text-white font-bold text-xs tracking-[0.22em]">MAPS</span>
@@ -56,7 +56,7 @@
             },
           }" color="gray" variant="solid" @click="openShowCafesNearMeModal" id="open-cafes-near-me-modal"><span
               class="flex items-center gap-2">
-              <UIcon name="i-lucide-coffee" class="w-5 h-5 text-white"></UIcon>Show cafes near me
+              <UIcon name="i-lucide-coffee" class="w-5 h-5 text-primary dark:text-white"></UIcon>Show cafes near me
             </span></UButton>
         </div>
       </div>
@@ -78,6 +78,7 @@ import { type LngLatLike } from "mapbox-gl";
 import { useResizeObserver } from "@vueuse/core";
 import { Geolocation } from "@capacitor/geolocation";
 import { loadingController } from "@ionic/vue";
+import { CheckPermission } from "@/utils/geolocation";
 import MapCafesNearMe from "@/components/map/CafesNearMe.vue";
 import type { Cafe } from "@/types/cafe";
 
@@ -114,19 +115,45 @@ useResizeObserver(MAPBOX_CONTAINER_REF, () => {
 onUnmounted(() => {
   clearCafeMarkers();
   map.value?.remove();
+  dismissLoader();
   modalController.dismiss();
 });
 
 onMounted(async () => {
-  showLoading();
-  await initializeMapLocation();
-  createMapInstance();
+  await showLoading();
+
+  const hasPermission = await CheckPermission();
+  if (!hasPermission) {
+    dismissLoader();
+    isLocationEnabled.value = false;
+    router.replace("/app/geolocation-permission");
+    return;
+  }
+
+  const initialized = await initializeMapLocation();
+  if (!initialized) {
+    dismissLoader();
+    return;
+  }
+
+  const isMapReady = createMapInstance();
+  if (!isMapReady) {
+    dismissLoader();
+    isLocationEnabled.value = false;
+    return;
+  }
+
+  await fetchNearbyCafes();
   openShowCafesNearMeModal();
 
   // Check if map is fully loaded
   map.value?.on("load", () => {
     isLoaded.value = true;
-    loader.value?.dismiss();
+    dismissLoader();
+  });
+
+  map.value?.on("error", () => {
+    dismissLoader();
   });
 
   map.value?.on("dragstart", () => {
@@ -140,11 +167,12 @@ const initializeMapLocation = async () => {
   const result = await getInitialLocation();
   if (!result.success) {
     console.error(result.error);
-    loader.value?.dismiss();
     isLocationEnabled.value = false;
-    return;
+    return false;
   }
+
   INITIAL_COORDINATES.value = result.data as LngLatLike;
+  return true;
 };
 
 const createMapInstance = () => {
@@ -155,12 +183,21 @@ const createMapInstance = () => {
       zoom: 17, // starting zoom
       style: MAPBOX_STYLE, // style URL
     });
+
+    return true;
   }
+
+  return false;
 };
 
 const getInitialLocation = async () => {
   try {
-    const position = await Geolocation.getCurrentPosition();
+    const position = await Geolocation.getCurrentPosition({
+      enableHighAccuracy: true,
+      timeout: 15000,
+      maximumAge: 5000,
+    });
+
     return { success: true, data: [position.coords.longitude, position.coords.latitude] };
   } catch (error) {
     return { success: false, error };
@@ -171,7 +208,15 @@ const showLoading = async () => {
   loader.value = await loadingController.create({
     message: "Loading map...",
   });
+
   await loader.value.present();
+};
+
+const dismissLoader = () => {
+  if (loader.value) {
+    loader.value.dismiss();
+    loader.value = null;
+  }
 };
 
 const openShowCafesNearMeModal = async () => {
@@ -391,18 +436,18 @@ const addCafeMarkersInMap = (cafes: Cafe[]) => {
   fitMapToCafes(cafes);
 };
 
-
-
 const cafeStore = useCafeStore();
-onMounted(async () => {
-  const locationResult = await getInitialLocation();
-  if (locationResult.success && locationResult.data) {
-    await cafeStore.fetchNearbyCafes(locationResult.data[1], locationResult.data[0]);
-    addCafeMarkersInMap(cafeStore.nearbyCafes);
-  } else {
-    console.error("Failed to get user location:", locationResult.error);
+
+const fetchNearbyCafes = async () => {
+  const [lng, lat] = INITIAL_COORDINATES.value as [number, number];
+
+  if (!Number.isFinite(lng) || !Number.isFinite(lat)) {
+    return;
   }
-});
+
+  await cafeStore.fetchNearbyCafes(lat, lng);
+  addCafeMarkersInMap(cafeStore.nearbyCafes);
+};
 </script>
 
 <style>

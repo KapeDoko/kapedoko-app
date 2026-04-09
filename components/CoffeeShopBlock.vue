@@ -1,6 +1,6 @@
 <template>
   <div class="flex w-full bg-white rounded-lg shadow">
-    <div class="relative max-w-[90px] min-h-full overflow-hidden rounded-l-lg bg-black/5">
+    <div class="relative max-w-[90px] shrink-0 min-h-full overflow-hidden rounded-l-lg bg-black/5">
       <div
         v-if="!isImageLoaded"
         class="absolute inset-0 animate-pulse bg-gradient-to-r from-black/10 via-black/5 to-black/10"

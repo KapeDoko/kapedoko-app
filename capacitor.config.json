@@ -2,6 +2,10 @@
   "appId": "com.kapedoko.app",
   "appName": "KapeDoko",
   "webDir": "dist",
+  "server": {
+    "url": "http://192.168.100.148:3000",
+    "cleartext": true
+  },
   "plugins": {
     "CapacitorHttp": {
       "enabled": true

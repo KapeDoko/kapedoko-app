@@ -12,7 +12,7 @@ PODS:
     - Capacitor
   - CapacitorPreferences (6.0.4):
     - Capacitor
-  - CapacitorStatusBar (6.0.1):
+  - CapacitorStatusBar (6.0.3):
     - Capacitor
 
 DEPENDENCIES:
@@ -51,7 +51,7 @@ SPEC CHECKSUMS:
   CapacitorHaptics: 05d33e20e394b1977dfd2a00a2621e04098164c1
   CapacitorKeyboard: 5bf4458dd989b56a60ea15c92cbca5fbfae6e9f9
   CapacitorPreferences: 5848e0691b36b4bb4acc98e481ab56d451578d30
-  CapacitorStatusBar: 9ed7f06318fd436917072a9bf60fda56d12c8bdb
+  CapacitorStatusBar: 149cde8f1328ec3aa6cbdd872a55137ae3f98b16
 
 PODFILE CHECKSUM: e3adcc5c30c0ddb5ea8c012b3badfa290322d825
 

@@ -2,12 +2,12 @@
   <ion-page>
     <ion-content :fullscreen="true">
       <div class="h-[100dvh] bg-kapedokoPrimary-50 flex flex-col overflow-hidden">
-        <div class="px-5 py-5">
-          <div class="h-[245px] bg-kapedokoPrimary-500 relative overflow-hidden shrink-0 rounded-2xl">
+        <div class="bg-kapedokoPrimary-500">
+          <div class="h-[250px] pt-5 relative overflow-hidden shrink-0">
             <img src="/assets/logo/KapeDoko-Light.svg" alt="Kapedoko"
               class="size-[260px] absolute -top-4 -right-10 opacity-10" />
             <div class="relative z-10 px-6 pt-12 text-white flex flex-col gap-2.5">
-              <div class="h-8 w-fit">
+              <div class="h-8 w-[120px]">
                 <LogoHorizontalKapedokoTextLight class="h-full w-full" />
               </div>
               <div class="flex flex-col leading-tight">
@@ -21,7 +21,7 @@
           </div>
         </div>
 
-        <div class="px-5 pb-5 flex flex-1">
+        <div class="px-5 pt-5 pb-8 flex flex-1">
           <UCard class="w-full rounded-2xl" :ui="{
             ring: 'ring-0',
             shadow: 'shadow-xl',
@@ -30,9 +30,14 @@
           }">
             <form @submit.prevent="handleLogin" class="flex flex-col justify-center">
 
-              <p class="text-center text-sm text-white/50 pt-2 pb-6">
-                Find your next work-friendly cafe with Kapedoko.
-              </p>
+              <div class="flex flex-col items-center">
+
+                <UIcon name="i-lucide-coffee" class="w-10 h-10 text-kapedokoPrimary-500 mb-2" />
+
+                <p class="text-center font-semibold text-sm text-kapedokoPrimary-500 pt-2 pb-6">
+                  Find your next work-friendly cafe with Kapedoko.
+                </p>
+              </div>
 
               <div class="space-y-3.5">
                 <UFormGroup label="Email" name="email">
@@ -43,9 +48,11 @@
                   <UInput v-model="password" type="password" placeholder="********" icon="i-lucide-lock" size="xl" />
                 </UFormGroup>
 
-                <p v-if="errorMsg" class="text-sm text-red-500 text-center">
+                <div v-if="errorMsg" class="text-red-500 px-2 py-2 rounded-md border border-red-500">
+                  <p class="text-sm text-center capitalize">
                   {{ errorMsg }}
                 </p>
+                </div>
 
                 <div class="flex flex-col gap-3 pt-3">
                   <UButton type="submit" block :loading="loading" color="gray" variant="solid" class="h-11 font-bold"
